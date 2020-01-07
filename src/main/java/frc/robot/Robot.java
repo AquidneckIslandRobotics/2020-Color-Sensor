@@ -87,11 +87,23 @@ public class Robot extends TimedRobot {
   SmartDashboard.putNumber("Green", detectedColor.green);  
   SmartDashboard.putNumber("Blue", detectedColor.blue);  
   SmartDashboard.putNumber("IR", IR); 
-  
+  SmartDashboard.putString("Color", colorDetector(detectedColor));
   int proximity = m_colorSensor.getProximity(); 
   SmartDashboard.putNumber("Proximity", proximity); 
   }
-
+  public String colorDetector(Color detectedColor){
+    if(detectedColor.blue > .35){ 
+    return "Blue"; 
+    }else if(detectedColor.green > .5 && detectedColor.red < .200){
+      return "Green";
+    }else if(detectedColor.red > .47 && detectedColor.green > .3){
+      return "Red";
+    }else if(detectedColor.green > .53 && detectedColor.red > .29){
+      return "Yellow";
+    }else{
+      return "Unkown";
+    }
+  }
   /**
    * This function is called once each time the robot enters Disabled mode.
    * You can use it to reset any subsystem information you want to clear when
